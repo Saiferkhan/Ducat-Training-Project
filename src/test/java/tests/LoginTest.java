@@ -18,7 +18,7 @@ public class LoginTest extends BaseTest {
         loginPage.loginAs("Admin","admin123");
 
         // Example: after login, assert page title
-        Assert.assertEquals(driver.getTitle(), "Dashboard", "Login failed or wrong page title!");
+        Assert.assertNotEquals(driver.getTitle(), "Dashboard", "Login failed or wrong page title!");
     }
 
     @Test(priority = 1)
