@@ -14,7 +14,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Checkout the source code from your Git repository
-                git url: 'https://github.com/Saiferkhan/Ducat-Training-Project,
+                git url: 'https://github.com/Saiferkhan/Ducat-Training-Project',
                     branch: 'main' // Specify your branch name
             }
         }
@@ -29,17 +29,9 @@ pipeline {
     }
 
     post {
-        // Actions to run after the pipeline finishes, regardless of the outcome
-        always {
-            // Publish TestNG/JUnit test results for visualization in Jenkins UI
-            // Ensure you have the JUnit or TestNG Results Plugin installed
-            publishTestReport() // Placeholder, the exact step name depends on the plugin and configuration
-            // You can also archive artifacts like screenshots or HTML reports
-            archiveArtifacts artifacts: 'target/surefire-reports/*.xml, target/surefire-reports/*.html', onlyIfSuccessful: false
-        }
-        failure {
-            // Actions to take if the build fails, e.g., send a Slack/email notification
-            echo 'Tests failed! Check console output for details.'
-        }
+    always {
+        // This is the correct method that Jenkins recognizes
+        junit '**/target/surefire-reports/*.xml' 
     }
+}
 }
